@@ -5,6 +5,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+const gamesRouter = require('./routes/games');
+const reviewsRouter = require('./routes/reviews');
+
 const app = express();
 const PORT = process.env.PORT || 4000; 
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -12,25 +15,24 @@ const MONGODB_URI = process.env.MONGODB_URI;
 // Middlewares
 app.use(cors()); 
 app.use(express.json()); 
+
+// Usar Rutas
+
 // Ruta de prueba inicial
 app.get('/', (req, res) => {
   res.send('API de GameTracker funcionando. (Listo para agregar modelos y rutas)');
 });
 // ... (Código de configuración de Express y Conexión a DB)
 
-// 6. Importar Rutas
-const gamesRouter = require('./routes/games');
-// const reviewsRouter = require('./routes/reviews'); // Añadir cuando esté listo
-
 // 7. Usar Rutas
 app.use('/api/juegos', gamesRouter); // Todos los endpoints de juegos comenzarán con /api/juegos
 
-// app.use('/api/reseñas', reviewsRouter); // Añadir cuando esté listo
+// gametracker-backend/server.js (en la sección de 'Usar Rutas')
+
+app.use('/api/resenas', reviewsRouter); // <-- ¡Esta línea debe estar activa!
 
 // Ruta de prueba inicial (Endpoint Raíz)
-app.get('/', (req, res) => {
-  res.send('API de GameTracker funcionando. (Listo para agregar modelos y rutas)');
-});
+
 
 // ... (Resto del código del servidor)
 // Conexión a MongoDB Atlas
